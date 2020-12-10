@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\.net core API\\DatingApp\\API\\API.csproj": {}
+    "C:\\.net core API\\DatingApp\\Api\\API.csproj": {}
   },
   "projects": {
-    "c:\\.net core API\\DatingApp\\API\\API.csproj": {
+    "C:\\.net core API\\DatingApp\\Api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\.net core API\\DatingApp\\API\\API.csproj",
+        "projectUniqueName": "C:\\.net core API\\DatingApp\\Api\\API.csproj",
         "projectName": "API",
-        "projectPath": "c:\\.net core API\\DatingApp\\API\\API.csproj",
+        "projectPath": "C:\\.net core API\\DatingApp\\Api\\API.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "c:\\.net core API\\DatingApp\\API\\obj\\",
+        "outputPath": "C:\\.net core API\\DatingApp\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.0, )",
