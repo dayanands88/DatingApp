@@ -32,6 +32,7 @@ export class NavComponent implements OnInit {
   }
   LogOut(){
     this.loggedIn=false;
+    this.accountservices.logout();
   }
 
 }
