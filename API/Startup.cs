@@ -20,7 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace API
 {
     public class Startup
@@ -44,6 +44,7 @@ namespace API
             });
            services.AddCors();
            services.AddIdentityServices(Configuration);
+                    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +70,9 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+
+
+
         }
     }
 }

@@ -13,13 +13,30 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config)
         {
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ItokenService,Tokenservice>();
+            services.AddScoped<IPhotoService,PhotoService>();
+            services.AddScoped<LogUserActivity>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+                
             });
+            
+            
+            //  services.AddDbContext<DataContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection"))
+            //  ,sqlOptions => {  
+            //         sqlOptions.AddRowNumberSupport() ;
+            //     }
+            //  );
+//              services
+//    .AddDbContext<DemoDbContext>(builder => builder
+//          .UseSqlServer("conn-string", sqlOptions =>
+//           {
+//                 sqlOptions.AddRowNumberSupport();
+//           });
             return services;
         }
     }

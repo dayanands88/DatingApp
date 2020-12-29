@@ -1,0 +1,93 @@
+<form [formGroup]='registerForms' (ngSubmit)="registerForms.valid && register()" autocomplete="off">
+    <h2 class="text-center text-primary">
+        Sign up
+    </h2>
+    <hr>
+    <div class="form-group">
+        <label class="control-label" style="margin-right: 10px;">I am a:</label>
+        <label class="radio-inline">
+            <input type="radio" value="male" formControlName='gender'> Male
+        </label>
+        <label class="radio-inline">
+            <input type="radio" value="female" formControlName='gender' class="ml-3"> Female
+        </label>
+    </div>
+    <app-text-input [formControl]='registerForms.controls["username"]' [label]='"UserName"'></app-text-input>
+    
+    <app-text-input [formControl]='registerForms.controls["knownAs"]' [label]='"Known As"'></app-text-input>
+    <app-date-input [formControl]='registerForms.controls["dateOfBirth"]' [label]='"Date of Birth"' [maxDate]='maxDate'></app-date-input>
+    <app-text-input [formControl]='registerForms.controls["city"]' [label]='"City"'></app-text-input>
+    <app-text-input [formControl]='registerForms.controls["country"]' [label]='"Country"'></app-text-input>
+
+    <app-text-input [formControl]='registerForms.controls["password"]' [label]='"Password"' [type]='"password"'></app-text-input>
+    <app-text-input [formControl]='registerForms.controls["confirmpassword"]' [label]='"Confirm Password"' [type]='"password"'></app-text-input>
+    <!-- name="username"  [(ngModel)]="model.userName"  -->
+    <!-- <div class="form-group">
+        <input type="text" 
+        [class.is-invalid]='registerForms.get("username").errors
+        && registerForms.get("username").touched'
+        class="form-control"
+        formControlName='username'
+        placeholder="username">
+        <div class="invalid-feedback">Please enter username</div>
+    </div>
+
+    <div class="form-group">
+        <input 
+            [class.is-invalid]='registerForms.get("password").errors
+            && registerForms.get("password").touched'
+            type="password" 
+            class="form-control"
+            formControlName='password'
+             placeholder="password">
+             <div *ngIf="registerForms.get('password').hasError('required')" 
+                class="invalid-feedback">Please enter password</div>
+             <div *ngIf="registerForms.get('password').hasError('minlength')" 
+                class="invalid-feedback">password must be at least 4 charector</div>
+             <div *ngIf="registerForms.get('password').hasError('maxlength')" 
+                class="invalid-feedback">password must be at most 8 charector</div>
+    </div>
+    <div class="form-group">
+        <input 
+        [class.is-invalid]='registerForms.get("confirmpassword").errors
+            && registerForms.get("confirmpassword").touched'
+            type="password" 
+            class="form-control"
+            formControlName='confirmpassword'
+            placeholder="confirm password">
+
+            <div *ngIf="registerForms.get('confirmpassword').hasError('required')" 
+            class="invalid-feedback">Please enter confirm password</div>
+         <div *ngIf="registerForms.get('confirmpassword').hasError('isMatching')" 
+            class="invalid-feedback">Confirm password must be password</div>
+    </div> -->
+    <!-- <div class="form-group">
+        <label> who is your favourite user?</label>
+        <select class="form-control">
+        <option *ngFor="let user of usersFromHomeComponent" [value]="user.userName">
+          
+        </option>
+    </select>
+    </div> -->
+    <!-- <div class="form-group">
+        <input type="password" class="form-control" 
+        name="password" 
+            [(ngModel)]="model.password" placeholder="password">
+    </div> -->
+
+    <div class="row" *ngIf="validationErrors.length > 0">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                    {{error}}
+            </li>
+        </ul>
+
+    </div>
+    <div class="form-group text-center">
+        <button [disabled]='!registerForms.valid' class="btn-success mr-2" (click)="register()" type="button">Register</button>
+        <button class="btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
+        
+    </div>
+</form>
+<p>Form Value: {{registerForms.value | json}}</p>
+<p>Form status: {{registerForms.status | json}}</p>

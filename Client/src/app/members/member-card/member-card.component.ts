@@ -12,7 +12,7 @@ export class MemberCardComponent implements OnInit {
   City?:string;
   Mem? :any;
 
-  @Input()  members?  : Member ;
+  @Input() public  members?  : Member ;
 
   constructor() { }
 
