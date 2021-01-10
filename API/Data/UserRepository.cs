@@ -39,16 +39,18 @@ namespace API.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-        //    return await _context.Users
-        //    .Take(5)
-        //    .Skip(4)
-        //    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-        //    .ToListAsync();
-            // var query = _context.Users
-            //             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            //             .AsNoTracking()
-            //             .AsQueryable();
-            // var query = _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider);
+            #region commented
+                //    return await _context.Users
+                //    .Take(5)
+                //    .Skip(4)
+                //    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                //    .ToListAsync();
+                    // var query = _context.Users
+                    //             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                    //             .AsNoTracking()
+                    //             .AsQueryable();
+                    // var query = _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider);
+         #endregion
             var query = _context.Users.AsQueryable();
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
             query = query.Where(u => u.Gender == userParams.Gender);
@@ -85,6 +87,13 @@ namespace API.Data
             .SingleOrDefaultAsync(x => x.UserName == UserName);
         }
 
+        public async Task<AppUser> GetUserByUserByIdAsync(int Id)
+        {
+            return await _context.Users
+            .Include(p => p.photos)
+            .SingleOrDefaultAsync(x => x.Id == Id);
+        }
+        
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

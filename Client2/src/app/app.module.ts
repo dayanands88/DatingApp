@@ -25,6 +25,12 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { MemberMessageComponent } from './members/member-message/member-message.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { RoleModalComponent } from './modals/role-modal/role-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +45,13 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     MemberEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
-    DateInputComponent
+    DateInputComponent,
+    MemberMessageComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    RoleModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,5 +68,6 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

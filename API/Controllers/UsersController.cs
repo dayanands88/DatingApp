@@ -33,6 +33,8 @@ namespace API.Controllers
             _userRespository = userRespository;
 
         }
+
+        // [Authorize(Roles = "Admin")]
         [HttpGet]
 
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
@@ -40,11 +42,11 @@ namespace API.Controllers
             // var user = await _userRespository.GetUserAsync();
             // var UsersToReturn =_mapper.Map<IEnumerable<MemberDto>>(user);
             // return Ok(UsersToReturn);
-            var user = await _userRespository.GetUserByIdAsync(Convert.ToInt32(User.GetUsername()));
-            userParams.CurrentUsername = user.UserName;
+            // var user = await _userRespository.GetUserByIdAsync(Convert.ToInt32(User.GetUsername()));
+            userParams.CurrentUsername = User.GetUsername();
 
             if (string.IsNullOrEmpty(userParams.Gender))
-                userParams.Gender = user.Gender == "male" ? "female" : "male";
+                userParams.Gender = userParams.Gender == "male" ? "female" : "male";
             var Users = await _userRespository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(Users.CurrentPage, Users.PageSize, 
                     Users.TotalCount, Users.TotalPages);
@@ -52,6 +54,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize(Roles = "Member")]
         [HttpGet("{username}",Name ="GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
@@ -127,6 +130,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
             var user = await _userRespository.GetUserByUserName(User.GetUsername());
+           
             var photo = user.photos.FirstOrDefault( x => x.Id == photoId);
             if (photo == null) return NotFound();
             if(photo.IsMain) return BadRequest("You cannot delete you main photo");

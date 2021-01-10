@@ -21,6 +21,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using API.SingnaIR;
+
 namespace API
 {
     public class Startup
@@ -44,6 +46,7 @@ namespace API
             });
            services.AddCors();
            services.AddIdentityServices(Configuration);
+           services.AddSignalR();
                     
         }
 
@@ -62,13 +65,22 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins("http://localhost:4200"));
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapFallbackToController("Index","Fallback");
             });
 
 
